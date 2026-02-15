@@ -23,24 +23,16 @@ export default async function ProjectsPage() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-br from-helvino-navy via-helvino-blue to-helvino-navy text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <Badge className="mb-4 bg-helvino-orange border-none">Our Portfolio</Badge>
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-              Projects That Drive Success
-            </h1>
-            <p className="text-xl text-gray-200 leading-relaxed">
-              Explore our portfolio of successful projects across diverse industries. 
-              Each solution is tailored to meet specific business challenges and deliver 
-              measurable results.
-            </p>
+            <h1 className="text-4xl lg:text-5xl font-bold mb-6">Projects That Drive Success</h1>
+            <p className="text-xl text-gray-200 leading-relaxed">Explore our portfolio of successful projects across diverse industries. Each solution is tailored to meet specific business challenges and deliver measurable results.</p>
           </div>
         </div>
       </section>
 
-      {/* Projects Grid */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {projects.length === 0 ? (
@@ -54,14 +46,7 @@ export default async function ProjectsPage() {
                 <Card key={project.id} className="group hover:shadow-xl transition-all overflow-hidden">
                   {project.images && (project.images as any)[0] && (
                     <div className="aspect-video overflow-hidden bg-gray-200">
-                      <img
-                        src={(project.images as any)[0]}
-                        alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        onError={(e) => {
-                          e.currentTarget.src = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
-                        }}
-                      />
+                      <div className="w-full h-full bg-gradient-to-br from-helvino-blue/20 to-helvino-orange/20" />
                     </div>
                   )}
                   <CardHeader>
@@ -73,26 +58,18 @@ export default async function ProjectsPage() {
                         <Badge variant="outline">{project.industry}</Badge>
                       )}
                     </div>
-                    <CardTitle className="group-hover:text-helvino-blue transition-colors">
-                      {project.title}
-                    </CardTitle>
+                    <CardTitle className="group-hover:text-helvino-blue transition-colors">{project.title}</CardTitle>
                     {project.client && (
                       <CardDescription>Client: {project.client}</CardDescription>
                     )}
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600 line-clamp-3 mb-4">
-                      {project.description}
-                    </p>
+                    <p className="text-gray-600 line-clamp-3 mb-4">{project.description}</p>
                     {project.service && (
-                      <Badge variant="outline" className="mb-4">
-                        {project.service.title}
-                      </Badge>
+                      <Badge variant="outline" className="mb-4">{project.service.title}</Badge>
                     )}
                     <Link href={`/projects/${project.slug}`}>
-                      <Button variant="link" className="p-0 text-helvino-blue">
-                        View Details <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
+                      <Button variant="link" className="p-0 text-helvino-blue">View Details <ArrowRight className="ml-2 h-4 w-4" /></Button>
                     </Link>
                   </CardContent>
                 </Card>
@@ -102,19 +79,12 @@ export default async function ProjectsPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold text-helvino-navy mb-6">
-            Start Your Project Today
-          </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Ready to bring your vision to life? Let's discuss your project requirements.
-          </p>
+          <h2 className="text-3xl lg:text-4xl font-bold text-helvino-navy mb-6">Start Your Project Today</h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">Ready to bring your vision to life? Let's discuss your project requirements.</p>
           <Link href="/contact">
-            <Button size="lg" className="bg-helvino-blue hover:bg-helvino-blue/90">
-              Get Started <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            <Button size="lg" className="bg-helvino-blue hover:bg-helvino-blue/90">Get Started <ArrowRight className="ml-2 h-4 w-4" /></Button>
           </Link>
         </div>
       </section>

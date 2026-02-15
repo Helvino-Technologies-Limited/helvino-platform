@@ -38,42 +38,29 @@ export default function ContactPage() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-br from-helvino-navy via-helvino-blue to-helvino-navy text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <Badge className="mb-4 bg-helvino-orange border-none">Get In Touch</Badge>
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-              Let's Start a Conversation
-            </h1>
-            <p className="text-xl text-gray-200 leading-relaxed">
-              Ready to transform your business with innovative IT solutions? 
-              We'd love to hear from you. Get in touch and let's discuss your project.
-            </p>
+            <h1 className="text-4xl lg:text-5xl font-bold mb-6">Let's Start a Conversation</h1>
+            <p className="text-xl text-gray-200 leading-relaxed">Ready to transform your business with innovative IT solutions? We'd love to hear from you. Get in touch and let's discuss your project.</p>
           </div>
         </div>
       </section>
-
-      {/* Contact Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-12">
-            {/* Contact Form */}
             <div className="lg:col-span-2">
               <Card>
                 <CardHeader>
                   <CardTitle className="text-2xl">Send Us a Message</CardTitle>
-                  <p className="text-gray-600">
-                    Fill out the form below and we'll get back to you within 24 hours.
-                  </p>
+                  <p className="text-gray-600">Fill out the form below and we'll get back to you within 24 hours.</p>
                 </CardHeader>
                 <CardContent>
                   <ContactForm />
                 </CardContent>
               </Card>
             </div>
-
-            {/* Contact Info */}
             <div className="space-y-6">
               <Card>
                 <CardHeader>
@@ -88,14 +75,7 @@ export default function ContactPage() {
                       <div>
                         <p className="font-semibold text-helvino-navy">{info.title}</p>
                         {info.href ? (
-                          
-                            href={info.href}
-                            target={info.href.startsWith('http') ? '_blank' : undefined}
-                            rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                            className="text-gray-600 hover:text-helvino-blue transition-colors"
-                          >
-                            {info.content}
-                          </a>
+                          <a href={info.href} target={info.href.startsWith('http') ? '_blank' : undefined} rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined} className="text-gray-600 hover:text-helvino-blue transition-colors">{info.content}</a>
                         ) : (
                           <p className="text-gray-600">{info.content}</p>
                         )}
@@ -104,7 +84,6 @@ export default function ContactPage() {
                   ))}
                 </CardContent>
               </Card>
-
               <Card className="bg-gradient-to-br from-helvino-navy to-helvino-blue text-white">
                 <CardContent className="pt-6">
                   <div className="flex items-start gap-3 mb-4">
@@ -116,17 +95,13 @@ export default function ContactPage() {
                       <p className="text-sm text-gray-200">Sunday: Closed</p>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-300 mt-4">
-                    24/7 support available for enterprise clients
-                  </p>
+                  <p className="text-sm text-gray-300 mt-4">24/7 support available for enterprise clients</p>
                 </CardContent>
               </Card>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Map Section (Optional - placeholder) */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -134,7 +109,6 @@ export default function ContactPage() {
             <p className="text-gray-600">Located in Kisumu, Kenya</p>
           </div>
           <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
-            {/* Add Google Maps embed here if needed */}
             <div className="w-full h-full flex items-center justify-center">
               <p className="text-gray-500">Map Loading...</p>
             </div>

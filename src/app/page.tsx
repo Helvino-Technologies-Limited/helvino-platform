@@ -51,7 +51,6 @@ export default async function HomePage() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
       <section className="relative hero-pattern pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-helvino-navy/95 via-helvino-blue/90 to-helvino-navy/95" />
         
@@ -101,25 +100,15 @@ export default async function HomePage() {
             <div className="hidden lg:block relative">
               <div className="relative w-full h-[500px] rounded-2xl overflow-hidden shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-helvino-blue/20 to-helvino-orange/20 backdrop-blur-sm" />
-                <img
-                  src="/images/hero-tech.jpg"
-                  alt="Technology Solutions"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
-                  }}
-                />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Animated background elements */}
         <div className="absolute top-20 right-10 w-72 h-72 bg-helvino-orange/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-helvino-blue/10 rounded-full blur-3xl animate-pulse delay-700" />
       </section>
 
-      {/* Stats Section */}
       <section className="py-12 bg-white border-b">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
@@ -134,7 +123,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Services Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -187,7 +175,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -219,16 +206,7 @@ export default async function HomePage() {
             </div>
 
             <div className="relative">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
-                <img
-                  src="/images/team.jpg"
-                  alt="Our Team"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
-                  }}
-                />
-              </div>
+              <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-helvino-blue to-helvino-orange" />
               <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-helvino-orange/20 rounded-2xl -z-10" />
               <div className="absolute -top-6 -left-6 w-48 h-48 bg-helvino-blue/20 rounded-2xl -z-10" />
             </div>
@@ -236,7 +214,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Featured Projects Section */}
       {projects.length > 0 && (
         <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -253,15 +230,6 @@ export default async function HomePage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects.map((project) => (
                 <Card key={project.id} className="group hover:shadow-xl transition-all overflow-hidden">
-                  {project.images && (project.images as any)[0] && (
-                    <div className="aspect-video overflow-hidden">
-                      <img
-                        src={(project.images as any)[0]}
-                        alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                    </div>
-                  )}
                   <CardHeader>
                     <CardTitle className="group-hover:text-helvino-blue transition-colors">
                       {project.title}
@@ -295,7 +263,6 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Testimonials Section */}
       {reviews.length > 0 && (
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -348,7 +315,6 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-helvino-navy via-helvino-blue to-helvino-navy text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold mb-6">
