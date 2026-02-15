@@ -23,6 +23,7 @@ const navigation = [
   { name: "Projects", href: "/admin/projects", icon: FolderKanban },
   { name: "Reviews", href: "/admin/reviews", icon: Star },
   { name: "Blog", href: "/admin/blog", icon: FileText },
+  { name: "Settings", href: "/admin/settings", icon: Settings },
   { name: "Leads", href: "/admin/leads", icon: MessageSquare },
 ]
 

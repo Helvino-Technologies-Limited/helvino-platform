@@ -18,18 +18,22 @@ export function LoginForm() {
     setLoading(true)
 
     const formData = new FormData(e.currentTarget)
-    const email = formData.get('email')
-    const password = formData.get('password')
+    const data = {
+      email: formData.get('email'),
+      password: formData.get('password'),
+    }
 
     try {
       const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify(data)
       })
 
+      const result = await response.json()
+
       if (!response.ok) {
-        throw new Error('Invalid credentials')
+        throw new Error(result.error || 'Login failed')
       }
 
       toast({
@@ -38,10 +42,11 @@ export function LoginForm() {
       })
 
       router.push('/admin')
-    } catch (error) {
+      router.refresh()
+    } catch (error: any) {
       toast({
         title: "Login Failed",
-        description: "Invalid email or password",
+        description: error.message || "Invalid credentials. Please try again.",
         variant: "destructive"
       })
     } finally {
@@ -58,7 +63,8 @@ export function LoginForm() {
           name="email"
           type="email"
           required
-          placeholder="admin@helvinotech.com"
+          autoComplete="email"
+          disabled={loading}
         />
       </div>
 
@@ -69,14 +75,15 @@ export function LoginForm() {
           name="password"
           type="password"
           required
-          placeholder="••••••••"
+          autoComplete="current-password"
+          disabled={loading}
         />
       </div>
 
       <Button
         type="submit"
-        disabled={loading}
         className="w-full bg-helvino-blue hover:bg-helvino-blue/90"
+        disabled={loading}
       >
         {loading ? (
           <>
