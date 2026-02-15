@@ -25,7 +25,7 @@ export default function ContactPage() {
     {
       icon: MapPin,
       title: "Location",
-      content: "Kisumu, Kenya",
+      content: "Siaya, Kenya",
       href: null
     },
     {
@@ -106,7 +106,7 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-helvino-navy mb-4">Visit Our Office</h2>
-            <p className="text-gray-600">Located in Kisumu, Kenya</p>
+            <p className="text-gray-600">Located in Siaya, Kenya</p>
           </div>
           <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
             <div className="w-full h-full flex items-center justify-center">

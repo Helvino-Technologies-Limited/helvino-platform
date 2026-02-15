@@ -4,31 +4,17 @@ import "./globals.css"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { Toaster } from "@/components/ui/toaster"
+import { WhatsAppFloat } from "@/components/layout/whatsapp-float"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: {
-    default: "Helvino Technologies Limited | Building Reliable Digital Foundations",
-    template: "%s | Helvino Technologies Limited"
+    default: "Helvino Technologies Limited | IT Solutions & Services",
+    template: "%s | Helvino Technologies"
   },
-  description: "Leading IT solutions provider in Kenya specializing in software development, cybersecurity, network infrastructure, CCTV surveillance, and IT consultancy services.",
-  keywords: ["IT solutions", "software development", "cybersecurity", "network installation", "CCTV systems", "Kenya", "Kisumu", "IT consultancy"],
-  authors: [{ name: "Helvino Technologies Limited" }],
-  creator: "Helvino Technologies Limited",
-  openGraph: {
-    type: "website",
-    locale: "en_KE",
-    url: "https://helvinotech.com",
-    title: "Helvino Technologies Limited",
-    description: "Building Reliable Digital Foundations",
-    siteName: "Helvino Technologies Limited",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Helvino Technologies Limited",
-    description: "Building Reliable Digital Foundations",
-  },
+  description: "Leading IT solutions provider in Kenya specializing in software development, cybersecurity, networking, and surveillance systems. Building reliable digital foundations for businesses worldwide.",
+  keywords: ["IT solutions", "software development", "cybersecurity", "networking", "CCTV", "Kenya", "Siaya", "Helvino Technologies"],
 }
 
 export default function RootLayout({
@@ -37,13 +23,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
         <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
+        <main className="min-h-screen">{children}</main>
         <Footer />
+        <WhatsAppFloat />
         <Toaster />
       </body>
     </html>

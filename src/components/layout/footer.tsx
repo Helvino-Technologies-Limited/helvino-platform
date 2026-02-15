@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Mail, Phone, Linkedin, MapPin } from "lucide-react"
+import { Mail, Phone, Linkedin, MapPin, MessageCircle } from "lucide-react"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -45,8 +45,12 @@ export function Footer() {
                 <a href="tel:0703445756" className="hover:text-helvino-orange transition-colors">0703 445 756</a>
               </li>
               <li className="flex items-center space-x-2 text-sm text-gray-300">
+                <MessageCircle className="h-4 w-4 text-helvino-orange" />
+                <a href="https://wa.me/254703445756" target="_blank" rel="noopener noreferrer" className="hover:text-helvino-orange transition-colors">WhatsApp Chat</a>
+              </li>
+              <li className="flex items-center space-x-2 text-sm text-gray-300">
                 <MapPin className="h-4 w-4 text-helvino-orange" />
-                <span>Kisumu, Kenya</span>
+                <span>Siaya, Kenya | Serving Clients Worldwide</span>
               </li>
               <li className="flex items-center space-x-2 text-sm text-gray-300">
                 <Linkedin className="h-4 w-4 text-helvino-orange" />

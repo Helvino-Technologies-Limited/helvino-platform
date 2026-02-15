@@ -32,7 +32,7 @@ export default function AboutPage() {
   ]
 
   const milestones = [
-    { year: "2019", event: "Company Founded", description: "Helvino Technologies established in Kisumu" },
+    { year: "2019", event: "Company Founded", description: "Helvino Technologies established in Siaya" },
     { year: "2020", event: "50+ Projects", description: "Delivered solutions across multiple industries" },
     { year: "2022", event: "100+ Clients", description: "Built a strong client base across East Africa" },
     { year: "2024", event: "200+ Projects", description: "Expanded services and technical capabilities" },
