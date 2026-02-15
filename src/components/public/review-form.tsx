@@ -33,8 +33,8 @@ export function ReviewForm() {
       clientName: formData.get('clientName'),
       company: formData.get('company'),
       email: formData.get('email'),
+      rating,
       review: formData.get('review'),
-      rating
     }
 
     try {
@@ -44,13 +44,14 @@ export function ReviewForm() {
         body: JSON.stringify(data)
       })
 
-      if (!response.ok) throw new Error('Failed to submit')
+      if (!response.ok) throw new Error('Failed to submit review')
 
       toast({
         title: "Review Submitted!",
-        description: "Thank you! Your review will be published after approval.",
+        description: "Thank you for your feedback. Your review is pending approval.",
       })
 
+      // Reset form
       e.currentTarget.reset()
       setRating(0)
     } catch (error) {
@@ -76,21 +77,24 @@ export function ReviewForm() {
               onClick={() => setRating(star)}
               onMouseEnter={() => setHoveredRating(star)}
               onMouseLeave={() => setHoveredRating(0)}
-              className="focus:outline-none"
+              className="transition-transform hover:scale-110"
             >
               <Star
-                className={`h-8 w-8 transition-colors ${
+                className={`h-8 w-8 ${
                   star <= (hoveredRating || rating)
-                    ? "fill-helvino-orange text-helvino-orange"
+                    ? "fill-yellow-500 text-yellow-500"
                     : "text-gray-300"
                 }`}
               />
             </button>
           ))}
         </div>
+        {rating > 0 && (
+          <p className="text-sm text-gray-600">You rated: {rating} star{rating > 1 ? 's' : ''}</p>
+        )}
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="clientName">Your Name *</Label>
           <Input
@@ -102,22 +106,23 @@ export function ReviewForm() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="company">Company</Label>
+          <Label htmlFor="email">Email Address *</Label>
           <Input
-            id="company"
-            name="company"
-            placeholder="Company Name"
+            id="email"
+            name="email"
+            type="email"
+            required
+            placeholder="john@example.com"
           />
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email">Email (won't be published)</Label>
+        <Label htmlFor="company">Company (Optional)</Label>
         <Input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="john@example.com"
+          id="company"
+          name="company"
+          placeholder="Your Company Name"
         />
       </div>
 
@@ -127,8 +132,8 @@ export function ReviewForm() {
           id="review"
           name="review"
           required
-          rows={5}
-          placeholder="Tell us about your experience..."
+          rows={6}
+          placeholder="Tell us about your experience working with Helvino Technologies..."
         />
       </div>
 
@@ -148,7 +153,7 @@ export function ReviewForm() {
       </Button>
 
       <p className="text-sm text-gray-500 text-center">
-        Your review will be published after it's been approved by our team.
+        Your review will be visible after admin approval
       </p>
     </form>
   )

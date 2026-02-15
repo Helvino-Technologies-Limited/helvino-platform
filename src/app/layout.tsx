@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   },
   description: "Leading IT solutions provider in Kenya specializing in software development, cybersecurity, networking, and surveillance systems. Building reliable digital foundations for businesses worldwide.",
   keywords: ["IT solutions", "software development", "cybersecurity", "networking", "CCTV", "Kenya", "Siaya", "Helvino Technologies"],
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({
@@ -23,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={inter.className}>
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <body className={inter.className} suppressHydrationWarning>
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />
