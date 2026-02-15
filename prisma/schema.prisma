@@ -1,0 +1,156 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  password      String
+  role          UserRole  @default(EDITOR)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  posts         BlogPost[]
+
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  EDITOR
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String   @db.Text
+  icon        String?
+  image       String?
+  features    Json?
+  seoTitle    String?
+  seoDescription String?
+  status      Status   @default(ACTIVE)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  projects    Project[]
+  reviews     Review[]
+
+  @@map("services")
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String   @db.Text
+  client      String?
+  industry    String?
+  problem     String?  @db.Text
+  solution    String?  @db.Text
+  technologies Json?
+  images      Json?
+  featured    Boolean  @default(false)
+  status      ProjectStatus @default(COMPLETED)
+  serviceId   String?
+  service     Service? @relation(fields: [serviceId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("projects")
+}
+
+enum ProjectStatus {
+  ONGOING
+  COMPLETED
+}
+
+model Review {
+  id          String   @id @default(cuid())
+  clientName  String
+  company     String?
+  email       String?
+  rating      Int
+  review      String   @db.Text
+  featured    Boolean  @default(false)
+  status      ReviewStatus @default(PENDING)
+  serviceId   String?
+  service     Service? @relation(fields: [serviceId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("reviews")
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String?
+  content     String   @db.Text
+  coverImage  String?
+  category    String?
+  tags        Json?
+  seoTitle    String?
+  seoDescription String?
+  status      Status   @default(DRAFT)
+  views       Int      @default(0)
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("blog_posts")
+}
+
+model ContactLead {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  company     String?
+  service     String?
+  message     String   @db.Text
+  type        LeadType @default(CONTACT)
+  status      LeadStatus @default(NEW)
+  notes       String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("contact_leads")
+}
+
+enum LeadType {
+  CONTACT
+  QUOTATION
+  PARTNERSHIP
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  IN_PROGRESS
+  CLOSED
+  LOST
+}
+
+enum Status {
+  DRAFT
+  ACTIVE
+  INACTIVE
+}
