@@ -10,6 +10,7 @@ import {
   Star, 
   FileText, 
   MessageSquare,
+  Settings,
   LogOut,
   Menu,
   X
@@ -23,8 +24,8 @@ const navigation = [
   { name: "Projects", href: "/admin/projects", icon: FolderKanban },
   { name: "Reviews", href: "/admin/reviews", icon: Star },
   { name: "Blog", href: "/admin/blog", icon: FileText },
-  { name: "Settings", href: "/admin/settings", icon: Settings },
   { name: "Leads", href: "/admin/leads", icon: MessageSquare },
+  { name: "Settings", href: "/admin/settings", icon: Settings },
 ]
 
 export function AdminNav() {
@@ -41,7 +42,6 @@ export function AdminNav() {
     <nav className="bg-white border-b sticky top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <Link href="/admin" className="flex items-center space-x-3">
             <img
               src="/images/logo.png"
@@ -53,7 +53,6 @@ export function AdminNav() {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
             {navigation.map((item) => {
               const isActive = pathname === item.href
@@ -82,7 +81,6 @@ export function AdminNav() {
             </Button>
           </div>
 
-          {/* Mobile menu button */}
           <button
             className="lg:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -95,7 +93,6 @@ export function AdminNav() {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="lg:hidden py-4 border-t">
             <div className="flex flex-col space-y-1">
