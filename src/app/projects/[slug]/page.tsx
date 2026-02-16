@@ -7,20 +7,30 @@ import { ArrowLeft, ExternalLink } from "lucide-react"
 import { prisma } from "@/lib/prisma"
 
 async function getProject(slug: string) {
-  return await prisma.project.findUnique({
-    where: { slug },
-    include: { service: true }
-  })
+  try {
+    return await prisma.project.findUnique({
+      where: { slug },
+      include: { service: true }
+    })
+  } catch (error) {
+    console.error('Error fetching project:', error)
+    return null
+  }
 }
 
 export async function generateStaticParams() {
-  const projects = await prisma.project.findMany({
-    select: { slug: true }
-  })
-  
-  return projects.map((project) => ({
-    slug: project.slug,
-  }))
+  try {
+    const projects = await prisma.project.findMany({
+      select: { slug: true }
+    })
+    
+    return projects.map((project) => ({
+      slug: project.slug,
+    }))
+  } catch (error) {
+    console.error('Error generating static params:', error)
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
@@ -37,6 +47,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     description: project.description
   }
 }
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export default async function ProjectDetailPage({ params }: { params: { slug: string } }) {
   const project = await getProject(params.slug)

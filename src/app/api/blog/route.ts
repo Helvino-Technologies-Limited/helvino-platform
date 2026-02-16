@@ -1,15 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { generateSlug } from '@/lib/utils'
+import slugify from 'slugify'
 
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url)
-    const status = searchParams.get('status')
-
     const posts = await prisma.blogPost.findMany({
-      where: status ? { status: status as any } : { status: 'ACTIVE' },
-      include: { author: { select: { name: true, email: true } } },
+      include: { author: true },
       orderBy: { createdAt: 'desc' }
     })
 
@@ -28,7 +24,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { 
       title, 
-      excerpt,
+      excerpt, 
       content, 
       coverImage, 
       category, 
@@ -36,8 +32,7 @@ export async function POST(request: NextRequest) {
       seoTitle, 
       seoDescription, 
       status,
-      authorId,
-      publishedAt
+      authorId 
     } = body
 
     if (!title || !content || !authorId) {
@@ -47,26 +42,26 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const slug = generateSlug(title)
+    const slug = slugify(title, { lower: true, strict: true })
 
     const post = await prisma.blogPost.create({
       data: {
         title,
         slug,
-        excerpt: excerpt || null,
+        excerpt,
         content,
-        coverImage: coverImage || null,
-        category: category || null,
-        tags: tags || null,
-        seoTitle: seoTitle || null,
-        seoDescription: seoDescription || null,
+        coverImage,
+        category,
+        tags,
+        seoTitle,
+        seoDescription,
         status: status || 'DRAFT',
         authorId,
-        publishedAt: publishedAt ? new Date(publishedAt) : null
+        publishedAt: status === 'ACTIVE' ? new Date() : null
       }
     })
 
-    return NextResponse.json({ success: true, post }, { status: 201 })
+    return NextResponse.json({ post }, { status: 201 })
   } catch (error) {
     console.error('Error creating blog post:', error)
     return NextResponse.json(

@@ -10,9 +10,10 @@ export const metadata = {
   description: "Explore our portfolio of successful IT projects across various industries",
 }
 
+export const revalidate = 0 // Disable cache to always show fresh data
+
 async function getProjects() {
   return await prisma.project.findMany({
-    where: { status: 'COMPLETED' },
     include: { service: true },
     orderBy: { createdAt: 'desc' }
   })
@@ -41,40 +42,47 @@ export default async function ProjectsPage() {
               <p className="text-gray-500 mt-2">Check back soon for updates!</p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {projects.map((project) => (
-                <Card key={project.id} className="group hover:shadow-xl transition-all overflow-hidden">
-                  {project.images && (project.images as any)[0] && (
-                    <div className="aspect-video overflow-hidden bg-gray-200">
-                      <div className="w-full h-full bg-gradient-to-br from-helvino-blue/20 to-helvino-orange/20" />
-                    </div>
-                  )}
-                  <CardHeader>
-                    <div className="flex items-center gap-2 mb-2">
-                      {project.featured && (
-                        <Badge className="bg-helvino-orange border-none">Featured</Badge>
-                      )}
-                      {project.industry && (
-                        <Badge variant="outline">{project.industry}</Badge>
-                      )}
-                    </div>
-                    <CardTitle className="group-hover:text-helvino-blue transition-colors">{project.title}</CardTitle>
-                    {project.client && (
-                      <CardDescription>Client: {project.client}</CardDescription>
+            <>
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-helvino-navy mb-4">All Projects ({projects.length})</h2>
+                <p className="text-gray-600">Browse our complete portfolio</p>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {projects.map((project) => (
+                  <Card key={project.id} className="group hover:shadow-xl transition-all overflow-hidden">
+                    {project.images && (project.images as any)[0] && (
+                      <div className="aspect-video overflow-hidden bg-gray-200">
+                        <div className="w-full h-full bg-gradient-to-br from-helvino-blue/20 to-helvino-orange/20" />
+                      </div>
                     )}
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 line-clamp-3 mb-4">{project.description}</p>
-                    {project.service && (
-                      <Badge variant="outline" className="mb-4">{project.service.title}</Badge>
-                    )}
-                    <Link href={`/projects/${project.slug}`}>
-                      <Button variant="link" className="p-0 text-helvino-blue">View Details <ArrowRight className="ml-2 h-4 w-4" /></Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    <CardHeader>
+                      <div className="flex items-center gap-2 mb-2">
+                        {project.featured && (
+                          <Badge className="bg-helvino-orange border-none">Featured</Badge>
+                        )}
+                        {project.industry && (
+                          <Badge variant="outline">{project.industry}</Badge>
+                        )}
+                        <Badge variant="outline">{project.status}</Badge>
+                      </div>
+                      <CardTitle className="group-hover:text-helvino-blue transition-colors">{project.title}</CardTitle>
+                      {project.client && (
+                        <CardDescription>Client: {project.client}</CardDescription>
+                      )}
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-600 line-clamp-3 mb-4">{project.description}</p>
+                      {project.service && (
+                        <Badge variant="outline" className="mb-4">{project.service.title}</Badge>
+                      )}
+                      <Link href={`/projects/${project.slug}`}>
+                        <Button variant="link" className="p-0 text-helvino-blue">View Details <ArrowRight className="ml-2 h-4 w-4" /></Button>
+                      </Link>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </section>

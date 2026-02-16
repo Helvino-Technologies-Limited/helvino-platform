@@ -17,6 +17,8 @@ import {
 } from "lucide-react"
 import { prisma } from "@/lib/prisma"
 
+export const revalidate = 0 // Disable cache
+
 async function getHomeData() {
   const [services, projects, reviews] = await Promise.all([
     prisma.service.findMany({
@@ -25,7 +27,7 @@ async function getHomeData() {
       orderBy: { order: 'asc' }
     }),
     prisma.project.findMany({
-      where: { featured: true, status: 'COMPLETED' },
+      where: { featured: true },
       take: 3,
       orderBy: { createdAt: 'desc' }
     }),
