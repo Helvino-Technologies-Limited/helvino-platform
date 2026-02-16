@@ -2,11 +2,11 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { 
-  Code, 
-  Wifi, 
-  Camera, 
-  Shield, 
+import {
+  Code,
+  Wifi,
+  Camera,
+  Shield,
   HeadphonesIcon,
   ArrowRight,
   CheckCircle2,
@@ -17,7 +17,7 @@ import {
 } from "lucide-react"
 import { prisma } from "@/lib/prisma"
 
-export const revalidate = 0 // Disable cache
+export const revalidate = 0
 
 async function getHomeData() {
   const [services, projects, reviews] = await Promise.all([
@@ -55,24 +55,24 @@ export default async function HomePage() {
     <div className="flex flex-col">
       <section className="relative hero-pattern pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-helvino-navy/95 via-helvino-blue/90 to-helvino-navy/95" />
-        
+
         <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-white space-y-8 animate-fade-in">
               <Badge className="bg-helvino-orange text-white border-none">
                 🚀 Trusted IT Solutions Partner
               </Badge>
-              
+
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
                 Building Reliable
                 <span className="block mt-2 bg-gradient-to-r from-white via-orange-200 to-helvino-orange bg-clip-text text-transparent">
                   Digital Foundations
                 </span>
               </h1>
-              
+
               <p className="text-lg sm:text-xl text-gray-200 leading-relaxed">
-                Transform your business with cutting-edge IT solutions. 
-                From software development to cybersecurity, we deliver 
+                Transform your business with cutting-edge IT solutions.
+                From software development to cybersecurity, we deliver
                 excellence that drives growth.
               </p>
 
@@ -101,7 +101,12 @@ export default async function HomePage() {
 
             <div className="hidden lg:block relative">
               <div className="relative w-full h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-helvino-blue/20 to-helvino-orange/20 backdrop-blur-sm" />
+                <img 
+                  src="/images/hero-bg.jpg" 
+                  alt="Helvino Technologies - IT Solutions" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-helvino-blue/30 to-helvino-orange/30" />
               </div>
             </div>
           </div>
@@ -141,7 +146,7 @@ export default async function HomePage() {
             {services.map((service, index) => {
               const icons = [Code, Wifi, Camera, Shield, HeadphonesIcon]
               const Icon = icons[index % icons.length]
-              
+
               return (
                 <Card key={service.id} className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-helvino-blue">
                   <CardHeader>
@@ -186,7 +191,7 @@ export default async function HomePage() {
                 Your Trusted Technology Partner
               </h2>
               <p className="text-lg text-gray-600 mb-8">
-                We combine technical expertise with business acumen to deliver 
+                We combine technical expertise with business acumen to deliver
                 solutions that drive real results for your organization.
               </p>
 
@@ -208,7 +213,13 @@ export default async function HomePage() {
             </div>
 
             <div className="relative">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-helvino-blue to-helvino-orange" />
+              <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
+                <img 
+                  src="/images/hero-bg.jpg" 
+                  alt="Why Choose Helvino" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-helvino-orange/20 rounded-2xl -z-10" />
               <div className="absolute -top-6 -left-6 w-48 h-48 bg-helvino-blue/20 rounded-2xl -z-10" />
             </div>
