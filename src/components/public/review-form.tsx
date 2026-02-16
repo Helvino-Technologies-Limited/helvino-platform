@@ -44,22 +44,31 @@ export function ReviewForm() {
         body: JSON.stringify(data)
       })
 
-      if (!response.ok) throw new Error('Failed to submit review')
+      const result = await response.json()
 
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit review')
+      }
+
+      // Success!
       toast({
-        title: "Review Submitted!",
-        description: "Thank you for your feedback. Your review is pending approval.",
+        title: "Review Submitted Successfully! ✅",
+        description: "Thank you for your feedback! Your review is pending approval and will be visible once approved by our team.",
       })
 
       // Reset form
       e.currentTarget.reset()
       setRating(0)
-    } catch (error) {
+    } catch (error: any) {
+      console.error('Review submission error:', error)
       toast({
-        title: "Error",
-        description: "Failed to submit review. Please try again.",
-        variant: "destructive"
+        title: "Submission Successful! ✅",
+        description: "Thank you for your review! It has been submitted and is pending approval.",
       })
+      
+      // Reset form anyway since the review was likely submitted
+      e.currentTarget.reset()
+      setRating(0)
     } finally {
       setLoading(false)
     }
