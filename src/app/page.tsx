@@ -77,13 +77,13 @@ export default async function HomePage() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact">
-                  <Button size="lg" className="bg-helvino-orange hover:bg-helvino-orange/90 text-white w-full sm:w-auto">
+                <Link href="/contact" className="w-full sm:w-auto">
+                  <Button size="lg" className="bg-helvino-orange hover:bg-helvino-orange/90 text-white w-full">
                     Get Started <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href="/services">
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 w-full sm:w-auto">
+                <Link href="/services" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 w-full">
                     Our Services
                   </Button>
                 </Link>
