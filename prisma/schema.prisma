@@ -114,8 +114,41 @@ model BlogPost {
   publishedAt DateTime?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  likes       BlogLike[]
+  comments    BlogComment[]
 
   @@map("blog_posts")
+}
+
+model BlogLike {
+  id        String   @id @default(cuid())
+  postId    String
+  post      BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userEmail String
+  userIP    String?
+  createdAt DateTime @default(now())
+  
+  @@unique([postId, userEmail])
+  @@map("blog_likes")
+}
+
+model BlogComment {
+  id        String   @id @default(cuid())
+  postId    String
+  post      BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  name      String
+  email     String
+  comment   String   @db.Text
+  status    CommentStatus @default(PENDING)
+  createdAt DateTime @default(now())
+  
+  @@map("blog_comments")
+}
+
+enum CommentStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
 
 model ContactLead {

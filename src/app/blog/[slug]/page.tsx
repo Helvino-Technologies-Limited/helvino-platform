@@ -6,6 +6,8 @@ import { ArrowLeft, Calendar, User } from "lucide-react"
 import { prisma } from "@/lib/prisma"
 import { formatDate } from "@/lib/utils"
 import { SocialShare } from "@/components/public/social-share"
+import { BlogLike } from "@/components/public/blog-like"
+import { BlogComments } from "@/components/public/blog-comments"
 
 async function getBlogPost(slug: string) {
   try {
@@ -100,7 +102,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             </div>
           )}
 
-          <div className="mb-8 pb-8 border-b">
+          <div className="mb-8 pb-8 border-b flex flex-wrap items-center gap-4">
+            <BlogLike postId={post.id} />
             <SocialShare 
               url={`/blog/${post.slug}`} 
               title={post.title} 
@@ -108,17 +111,12 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             />
           </div>
 
-          <div className="prose prose-lg max-w-none">
+          <div className="prose prose-lg max-w-none mb-12">
             <div dangerouslySetInnerHTML={{ __html: post.content }} />
           </div>
 
           <div className="mt-12 pt-8 border-t">
-            <p className="text-sm text-gray-600 mb-4">Share this article:</p>
-            <SocialShare 
-              url={`/blog/${post.slug}`} 
-              title={post.title} 
-              description={post.excerpt || ''} 
-            />
+            <BlogComments postId={post.id} />
           </div>
         </div>
       </article>
