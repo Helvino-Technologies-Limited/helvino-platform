@@ -33,11 +33,17 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Get user from session (you'll need to parse the session)
-    const email = session.value // Assuming session contains email
+    // Parse session to get user email
+    let userEmail: string
+    try {
+      const sessionData = JSON.parse(session.value)
+      userEmail = sessionData.email
+    } catch {
+      userEmail = session.value
+    }
 
     const user = await prisma.user.findUnique({
-      where: { email }
+      where: { email: userEmail }
     })
 
     if (!user) {
