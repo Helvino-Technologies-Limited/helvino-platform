@@ -24,6 +24,7 @@ export function ProjectForm({ project, services, isEdit = false }: ProjectFormPr
   const [newTech, setNewTech] = useState("")
   const [newImage, setNewImage] = useState("")
   const [featured, setFeatured] = useState(project?.featured || false)
+  const [selectedService, setSelectedService] = useState(project?.serviceId || "none")
   const router = useRouter()
   const { toast } = useToast()
 
@@ -65,7 +66,7 @@ export function ProjectForm({ project, services, isEdit = false }: ProjectFormPr
       images,
       featured,
       status: formData.get('status'),
-      serviceId: formData.get('serviceId') || null
+      serviceId: selectedService === "none" ? null : selectedService
     }
 
     try {
@@ -148,12 +149,12 @@ export function ProjectForm({ project, services, isEdit = false }: ProjectFormPr
 
         <div className="space-y-2">
           <Label htmlFor="serviceId">Related Service</Label>
-          <Select name="serviceId" defaultValue={project?.serviceId || ''}>
+          <Select value={selectedService} onValueChange={setSelectedService}>
             <SelectTrigger>
               <SelectValue placeholder="Select a service" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">None</SelectItem>
+              <SelectItem value="none">No Service</SelectItem>
               {services.map((service) => (
                 <SelectItem key={service.id} value={service.id}>
                   {service.title}
@@ -236,7 +237,7 @@ export function ProjectForm({ project, services, isEdit = false }: ProjectFormPr
           <div className="space-y-2 mt-2">
             {images.map((image, index) => (
               <div key={index} className="flex items-center gap-2 p-2 bg-gray-50 rounded">
-                <img src={image} alt="" className="h-16 w-16 object-cover rounded" />
+                <div className="h-16 w-16 bg-gray-200 rounded flex-shrink-0" />
                 <span className="flex-1 text-sm truncate">{image}</span>
                 <Button
                   type="button"
