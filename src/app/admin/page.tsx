@@ -1,10 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { 
-  Briefcase, 
-  FolderKanban, 
-  Star, 
+import {
+  Briefcase,
+  FolderKanban,
+  Star,
   MessageSquare,
+  MessageCircle,
   TrendingUp,
   Users,
   FileText,
@@ -25,6 +26,7 @@ async function getDashboardStats() {
     newLeads,
     totalBlogPosts,
     publishedPosts,
+    pendingComments,
   ] = await Promise.all([
     prisma.service.count(),
     prisma.service.count({ where: { status: 'ACTIVE' } }),
@@ -37,6 +39,7 @@ async function getDashboardStats() {
     prisma.contactLead.count({ where: { status: 'NEW' } }),
     prisma.blogPost.count(),
     prisma.blogPost.count({ where: { status: 'ACTIVE' } }),
+    prisma.blogComment.count({ where: { status: 'PENDING' } }),
   ])
 
   // Get recent items
@@ -74,6 +77,7 @@ async function getDashboardStats() {
       newLeads,
       totalBlogPosts,
       publishedPosts,
+      pendingComments,
       averageRating
     },
     recentLeads,
@@ -124,6 +128,14 @@ export default async function AdminDashboard() {
       icon: FileText,
       color: "text-indigo-600",
       bgColor: "bg-indigo-100"
+    },
+    {
+      title: "Comments",
+      value: stats.pendingComments,
+      description: "pending approval",
+      icon: MessageCircle,
+      color: "text-teal-600",
+      bgColor: "bg-teal-100"
     },
     {
       title: "Average Rating",

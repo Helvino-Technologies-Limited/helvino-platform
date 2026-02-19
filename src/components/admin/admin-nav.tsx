@@ -3,13 +3,14 @@
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { 
-  LayoutDashboard, 
-  Briefcase, 
-  FolderKanban, 
-  Star, 
-  FileText, 
+import {
+  LayoutDashboard,
+  Briefcase,
+  FolderKanban,
+  Star,
+  FileText,
   MessageSquare,
+  MessageCircle,
   Settings,
   LogOut,
   Menu,
@@ -24,6 +25,7 @@ const navigation = [
   { name: "Projects", href: "/admin/projects", icon: FolderKanban },
   { name: "Reviews", href: "/admin/reviews", icon: Star },
   { name: "Blog", href: "/admin/blog", icon: FileText },
+  { name: "Comments", href: "/admin/comments", icon: MessageCircle },
   { name: "Leads", href: "/admin/leads", icon: MessageSquare },
   { name: "Settings", href: "/admin/settings", icon: Settings },
 ]
