@@ -26,7 +26,8 @@ export function ContactForm() {
     e.preventDefault()
     setLoading(true)
 
-    const formData = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const formData = new FormData(form)
     const data = {
       name: formData.get('name'),
       email: formData.get('email'),
@@ -51,7 +52,7 @@ export function ContactForm() {
         description: "We'll get back to you within 24 hours.",
       })
 
-      e.currentTarget.reset()
+      form.reset()
     } catch (error) {
       toast({
         title: "Error",

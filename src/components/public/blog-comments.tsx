@@ -41,7 +41,8 @@ export function BlogComments({ postId }: BlogCommentsProps) {
     e.preventDefault()
     setSubmitting(true)
 
-    const formData = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const formData = new FormData(form)
     const data = {
       name: formData.get('name'),
       email: formData.get('email'),
@@ -64,7 +65,7 @@ export function BlogComments({ postId }: BlogCommentsProps) {
         description: "Your comment is pending approval and will appear once approved.",
       })
 
-      e.currentTarget.reset()
+      form.reset()
     } catch (error: any) {
       toast({
         title: "Error",
