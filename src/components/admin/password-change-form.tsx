@@ -15,7 +15,8 @@ export function PasswordChangeForm() {
     e.preventDefault()
     setLoading(true)
 
-    const formData = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const formData = new FormData(form)
     const newPassword = formData.get('newPassword')
     const confirmPassword = formData.get('confirmPassword')
 
@@ -52,7 +53,7 @@ export function PasswordChangeForm() {
         description: "Your password has been updated successfully.",
       })
 
-      e.currentTarget.reset()
+      form.reset()
     } catch (error: any) {
       toast({
         title: "Error",

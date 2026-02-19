@@ -28,7 +28,8 @@ export function ReviewForm() {
 
     setLoading(true)
 
-    const formData = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const formData = new FormData(form)
     const data = {
       clientName: formData.get('clientName'),
       company: formData.get('company'),
@@ -57,7 +58,7 @@ export function ReviewForm() {
       })
 
       // Reset form
-      e.currentTarget.reset()
+      form.reset()
       setRating(0)
     } catch (error: any) {
       console.error('Review submission error:', error)
@@ -67,7 +68,7 @@ export function ReviewForm() {
       })
       
       // Reset form anyway since the review was likely submitted
-      e.currentTarget.reset()
+      form.reset()
       setRating(0)
     } finally {
       setLoading(false)
